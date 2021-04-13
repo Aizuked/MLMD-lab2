@@ -6,27 +6,25 @@
     <body>
         <h2>Введите размерность матрицы nxn и укажите требуемое свойство отношения</h2>
 
-        <form name="mainform" method="POST" action="javascript:;" onsubmit="mainjsfunc();">
+        <form name="mainform" method="POST" action="javascript:;" onsubmit="mainjsfunc()">
 
-            <label for="text">n?=</label>
-            <input type="text" id="text" placeholder="nxn matrix size"><br>
-            
-            <label for="flag1">Рефлексивность</label>
-            <input name="radio" type="radio" id="flag1"><br>
+            <label for="text">nxn matrix size, n=</label>
+            <input type="text" id="n" placeholder="Например 123" required><br>
 
-            <label for="flag2">Симметричность</label>
-            <input name="radio" type="radio" id="flag2"><br>
+            <p>
+                <select id="selector">
+                    <option>Рефлексивность</option>
+                    <option>Симметричность</option>
+                    <option>Кососимметричность</option>
+                    <option>Тразитивность</option>
+                </select>
+            </p>
 
-            <label for="flag3">Кососимметричность</label>
-            <input name="radio" type="radio" id="flag3"><br>
-
-            <label for="flag4">Тразитивность</label>
-            <input name="radio" type="radio" id="flag4"><br>
-
-            <input type="submit"   value="Submit">
+            <input type="submit" value="Submit">
         </form>
 
         <p id="output"></p>
         
     </body>
+    <script src="script.js"></script>
 </html>
