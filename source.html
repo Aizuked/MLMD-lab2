@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MLMD lab-2</title>
+    </head>
+    <body>
+        <h2>Enter size of the matrix and check the relation needed</h2>
+
+        <form name="mainform" method="POST" action="javascript:;" onsubmit="mainjsfunc();">
+
+            <label for="text">n?=</label>
+            <input type="text" id="text" placeholder="nxn matrix size"><br>
+            
+            <label for="flag1">Reflex</label>
+            <input name="radio" type="radio" id="flag1"><br>
+
+            <label for="flag2">Symm</label>
+            <input name="radio" type="radio" id="flag2"><br>
+
+            <label for="flag3">KSym</label>
+            <input name="radio" type="radio" id="flag3"><br>
+
+            <label for="flag4">Trans</label>
+            <input name="radio" type="radio" id="flag4"><br>
+
+            <input type="submit"   value="Submit">
+        </form>
+
+        <p id="output"></p>
+        
+    </body>
+</html>
