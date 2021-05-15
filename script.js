@@ -1,45 +1,55 @@
 function mainjsfunc() {
-    var result = "";
-    //Создание и заполнение матрицы чекбоксов
-    var matrix = new Array(6);
-    for (let i = 0; i < 6; i++) matrix[i] = new Array(6);
-    for (let i = 1; i < 7; i++) {
-        for (let j = 1; j < 7; j++) {
-            matrix[i - 1][j - 1] = document.getElementById("cb" + i + j);
+
+    var n = document.getElementById("arr").value.split("\n").length;
+    var arr = document.getElementById("arr").value.split("\n");
+    var matrix = new Array(n);
+    for (let i = 0; i <= n; i++) {
+        matrix[i] = new Array(n);
+    }
+    for (let i = 0; i <= n; i++) {
+        for (let j = 0; j < n; j++) {
+            matrix[i][j] = new Array(n);
         }
     }
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            matrix[i][j] = Number(arr[i].split(" ")[j]);
+        }
+    }
+    console.log(matrix);
 
+    var result = "";
     //Рефлексивность
     var refctr = 0;
-    for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 6; j++) {
-            if (matrix[i][j].checked && i == j) refctr++;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (matrix[i][j] > 0 && i == j) refctr++;
         }
     }
-    if (refctr == 6) result += "рефлективная ";
-    else result += "антирефлективная ";
+    if (refctr == n) result += "рефлективная ";
+    else result += "антирефлексивная ";
 
     //Симметричность
     var symmctr = 0;
-    for (let i = 0; i < 6; i++) {
-        for (let j = i + 1; j < 6; j++) {
-            if (i != j && ((matrix[i][j].checked && !matrix[5 - i][5 - j].checked) || (!matrix[i][j].checked && matrix[5 - i][5 - j].checked))) {
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            if (i != j && ((matrix[i][j] > 0 && !(matrix[n - 1 - i][n - 1 - j] > 0)) || (!(matrix[i][j] > 0) && matrix[n - 1 - i][n - 1 - j] > 0))) {
                 symmctr++;
                 break;
             }
         }
     }
-    if (symmctr > 0) result += "антисимметричная ";
+    if (symmctr > 0) result += "кососимметричная ";
     else result += "симметричная ";
 
     //Транзитивность
     var trans = 0;
-    for (let i = 0; i < 6; i++) {
-        for (let j = i + 1; j < 6; j++) {
-            if (matrix[i][j].checked && i != j) {
-                for (let jj = i + 2; jj < 6; jj++) {
-                    if (matrix[j][jj].checked && matrix[i][jj].checked) trans = 1;
-                    if (matrix[j][jj].checked && !matrix[i][jj].checked) {
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            if (matrix[i][j] > 0 && i != j) {
+                for (let jj = i + 2; jj < n; jj++) {
+                    if (matrix[j][jj] > 0 && matrix[i][jj] > 0) trans = 1;
+                    if (matrix[j][jj] > 0 && !(matrix[i][jj] > 0)) {
                         trans = -1;
                         break;
                     }
@@ -47,12 +57,12 @@ function mainjsfunc() {
             }
         }
     }
-    for (let i = 5; i >= 0; i--) {
+    for (let i = n - 1; i >= 0; i--) {
         for (let j = i - 1; j >= 0; j--) {
-            if (matrix[i][j].checked && i != j) {
+            if (matrix[i][j] > 0 && i != j) {
                 for (let jj = i - 2; jj >= 0; jj--) {
-                    if (matrix[j][jj].checked && matrix[i][jj].checked) trans = 1;
-                    if (matrix[j][jj].checked && !matrix[i][jj].checked) {
+                    if (matrix[j][jj] > 0 && matrix[i][jj] > 0) trans = 1;
+                    if (matrix[j][jj] > 0 && !(matrix[i][jj] > 0)) {
                         trans = -1;
                         break;
                     }
@@ -63,6 +73,7 @@ function mainjsfunc() {
     if (trans > 0) result += "транзитивная"
     else result += "антитранзитивная"
 
+    console.log(matrix);
     //Вывод
     document.getElementById("output").innerHTML = result;
 }
