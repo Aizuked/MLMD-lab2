@@ -26,7 +26,7 @@ function mainjsfunc() {
             if (matrix[i][j] > 0 && i == j) refctr++;
         }
     }
-    if (refctr == n) result += "рефлективная ";
+    if (refctr == n) result += "рефлексивная ";
     else result += "антирефлексивная ";
 
     //Симметричность
